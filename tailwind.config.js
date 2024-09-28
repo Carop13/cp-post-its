@@ -12,11 +12,11 @@ module.exports = {
       'purple': '#3f3cbb',
       'pale-yello': '#fef3c7',
       'pale-green': '#d1fae5',
-      'pale-red': '#ffe4e6',
-      'pale-blue': '#a5f3fc',
-      'pale-red': '#ffe4e6',
-      'pale-purple': '#a5b4fc',
-      'gray-50': '#fafafa'
+      'pale-red': '#fee2e2',
+      'pale-blue': '#cffafe',
+      'pale-purple': '#ede9fe',
+      'gray-50': '#fafafa',
+      'gray-100': '#f4f4f5'
     },
   },
   plugins: [],

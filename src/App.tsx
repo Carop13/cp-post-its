@@ -7,7 +7,7 @@ import Search from "./components/Search/Search.tsx";
 
 function App() {
   const { lists } = useContext(ListContext);
-  const asideLis = [...lists];
+  const asideList = [...lists];
 
   const loadList = (id: string) => {
     console.log('id: ', id);
@@ -22,9 +22,9 @@ function App() {
           <h1 className="text-3xl font-bold underline">Some Post Its!!!</h1>
           <FormNewList />
           <section className="flex gap-9 sm:items-start w-full h-full">
-            <aside className="w-72 h-full bg-gray-50">
+            <aside className="w-72 bg-gray-50 border border-gray-100">
               <nav className="sm:items-start w-full grid grid-cols-1 divide-y">
-                {asideLis.map((list: IList) => (
+                {asideList.map((list: IList) => (
                   <a key={list.id} onClick={() => loadList(list.id)}
                       className="flex justify-between sm:items-center w-full py-3 px-4 hover:bg-pale-purple cursor-pointer">
                     <h4 className="text-lg font-bold text-ellipsis whitespace-nowrap overflow-hidden pr-4">{list.name}</h4>
