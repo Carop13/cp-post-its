@@ -33,6 +33,8 @@ const ListProvider = ({ children }: { children: ReactNode }) => {
     const [newListName, setNewListName] = useState("");
     const [idToEdit, setIdToEdit] = useState("");
     const [searchText, setSearchText] = useState("");
+    const [currentColorIndex, setCurrentColorIndex] = useState(0);
+    const colorArr = ['bg-pale-green', 'bg-pale-yello', 'bg-pale-red', 'bg-pale-purple', 'bg-pale-blue']; 
 
     const handlerAdd = (listID: string, text: string) => {
         setLists((prevLists) =>
@@ -129,11 +131,12 @@ const ListProvider = ({ children }: { children: ReactNode }) => {
             ...prevState,
             {
                 id: uuid(),
-                name: `${name || "Lista #" + lists.length}`,
+                name: `${name || "Lista #" + (lists.length + 1)}`,
                 items: [],
+                listColor: getColor(currentColorIndex)
             } as IList,
         ]);
-
+        setCurrentColorIndex(changeCurrentColorIndex)
         setNewListName("");
     };
 
@@ -144,6 +147,17 @@ const ListProvider = ({ children }: { children: ReactNode }) => {
     const handlerSearch = (text: string) => {
         setSearchText(text);
     };
+
+    const changeCurrentColorIndex = () => {
+        if (currentColorIndex + 1 === colorArr.length) {
+            return 0
+        }
+        return currentColorIndex + 1;
+    }
+
+    const getColor = (currentIndex: number) => {
+        return colorArr[currentIndex]; 
+    }
 
     const filteredList = useMemo(() => {
         if (searchText != "") {

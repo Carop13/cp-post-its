@@ -4,6 +4,7 @@ export interface IList {
     readonly id: string;
     name: string;
     items: IItem[];
+    listColor?: string;
 }
 
 export interface ListProps {

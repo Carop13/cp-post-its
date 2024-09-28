@@ -16,15 +16,15 @@ const List = ({ list }: ListProps) => {
     };
 
     return (
-        <div>
-            <h3>{list.name}</h3>
+        <div className={`flex flex-col gap-6 items-center sm:items-start p-8 rounded-xl ${list.listColor}`}>
+            <h3 className="text-2xl font-bold">{list.name}</h3>
             <Form
                 listId={list.id}
                 newInput={newInput}
                 onInputChange={handlerInputChange}
                 onSubmit={() => setNewInput("")}
             />
-            <ul>
+            <ul className="w-full flex flex-col gap-4 items-center sm:items-start">
                 {list.items.map((item: IItem) => (
                     <Item
                         item={item}
