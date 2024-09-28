@@ -16,6 +16,7 @@ module.exports = {
       'pale-blue': '#a5f3fc',
       'pale-red': '#ffe4e6',
       'pale-purple': '#a5b4fc',
+      'gray-50': '#fafafa'
     },
   },
   plugins: [],
