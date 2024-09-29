@@ -16,7 +16,12 @@ const List = ({ list }: ListProps) => {
     };
 
     return (
-        <div className={`flex flex-col gap-6 items-center sm:items-start p-8 rounded-xl ${list.listColor}`}>
+        <div id={list.id} 
+            className={`flex flex-col gap-6 items-center sm:items-start 
+            p-8 rounded-xl ${list.listColor} shadow-md 
+            border-2 border-gray-100
+            hover:border-2 hover:border-black
+            target:border-2 target:border-black`} >
             <h3 className="text-2xl font-bold">{list.name}</h3>
             <Form
                 listId={list.id}

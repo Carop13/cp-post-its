@@ -7,11 +7,6 @@ import Search from "./components/Search/Search.tsx";
 
 function App() {
   const { lists } = useContext(ListContext);
-  const asideList = [...lists];
-
-  const loadList = (id: string) => {
-    console.log('id: ', id);
-  }
 
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
@@ -22,13 +17,13 @@ function App() {
           <h1 className="text-3xl font-bold underline">Some Post Its!!!</h1>
           <FormNewList />
           <section className="flex gap-9 sm:items-start w-full h-full">
-            <aside className="w-72 bg-gray-50 border border-gray-100">
+            <aside className="w-72 bg-gray-50 border border-gray-100 shadow-md rounded-lg">
               <nav className="sm:items-start w-full grid grid-cols-1 divide-y">
-                {asideList.map((list: IList) => (
-                  <a key={list.id} onClick={() => loadList(list.id)}
+                {lists.map((list: IList) => (
+                  <a href={`#${list.id}`} key={list.id}
                       className="flex justify-between sm:items-center w-full py-3 px-4 hover:bg-pale-purple cursor-pointer">
                     <h4 className="text-lg font-bold text-ellipsis whitespace-nowrap overflow-hidden pr-4">{list.name}</h4>
-                    <span className="text-base font-semibold">{`${list.items.length === 0 ? '0' : "0/" + list.items.length }`}</span>
+                    <span className="text-base font-semibold">{`${list.items.length === 0 ? '0' : (list.checkCount || 0) + "/" + list.items.length }`}</span>
                   </a>
                 ))}
               </nav>

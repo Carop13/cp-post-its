@@ -8,17 +8,21 @@ const Item = ({ item, listId, onEdit }: ItemProps) => {
         useContext(ListContext);
 
     return (
-        <li className="flex justify-between w-full">
-            <div className="flex items-center gap-2">
-                <input
-                    type="checkbox"
-                    checked={item.checked}
-                    onChange={(e) => handlerCheck(listId, item.id, e)}
-                    id={`${item.id}`}
-                />
-                <p className="text-lg font-medium">{item.text}</p>
+        <li className="flex justify-between w-full gap-2">
+            <div className="flex items-center gap-2 flex-grow">
+                <label className="cursor-pointer shadow-md max-w-xs flex p-3 w-full bg-white border border-gray-100 rounded-lg text-sm font-medium hover:shadow-lg" htmlFor={`${item.id}`}>
+                    <input
+                        name={`${item.id}`}
+                        type="checkbox"
+                        checked={item.checked}
+                        onChange={(e) => handlerCheck(listId, item.id, e)}
+                        id={`${item.id}`}
+                        className="shrink-0 mt-0.5 border-gray-100 rounded disabled:opacity-50 disabled:pointer-events-none"
+                    />
+                    <span className="text-sm ms-3">{item.text}</span>
+                </label>
             </div>
-            <div className="flex gap-2">
+            <div className="flex gap-2 flex-grow-0">
                 <Button
                     label="Edit"
                     onClick={() => {

@@ -5,6 +5,8 @@ export interface IList {
     name: string;
     items: IItem[];
     listColor?: string;
+    checkCount: number;
+    strikethrough: number;
 }
 
 export interface ListProps {

@@ -1,4 +1,4 @@
-import { createContext, useState, ReactNode, useMemo } from "react";
+import { createContext, useState, ReactNode, useMemo, useEffect } from "react";
 import uuid from "react-uuid";
 import { IList } from "../components/List/types"; 
 
@@ -8,7 +8,7 @@ interface IListContext {
     handlerActions: (listID: string, text: string) => void;
     handlerDelete: (listID: string, id: string) => void;
     handlerCheck: (listID: string, id: string, e: any) => void;
-    handlerEdit: (id: any, text: string) => void;
+    handlerEdit: (id: any) => void;
     createNewList: (name: string) => void;
     handlerNewListName: (e: any) => void;
     handlerSearch: (test: string) => void;
@@ -20,7 +20,7 @@ const defaultListContext = {
     handlerActions: (listID: string, text: string) => {},
     handlerDelete: (listID: string, id: string) => {},
     handlerCheck: (listID: string, id: string, e: any) => {},
-    handlerEdit: (id: any, text: string) => {},
+    handlerEdit: (id: any) => {},
     createNewList: (name: string) => {},
     handlerNewListName: (e: any) => {},
     handlerSearch: (test: string) => {},
@@ -107,33 +107,41 @@ const ListProvider = ({ children }: { children: ReactNode }) => {
         setLists((prevLists) =>
             prevLists.map((list) => {
                 if (list.id === listID) {
-                    return {
+                    const count = e.target.checked ? 1 : -1;
+                    return  {
                         ...list,
-                        items: list.items.map((item) =>
-                            item.id === id
-                                ? { ...item, checked: e.target.checked }
-                                : item
+                        items: list.items.map((item) => {
+                            return item.id === id
+                            ? { ...item, checked: e.target.checked }
+                            : item
+                        }
                         ),
-                    } as IList;
+                        checkCount: list.checkCount + count,
+                        strikethrough: (list.checkCount + count) === list.items.length ? 1 : 0
+                    }; 
                 } else {
                     return list;
                 }
-            })
+            }).sort((listA, listB) => listA.strikethrough - listB.strikethrough)
         );
     };
 
-    const handlerEdit = (id: string, text: string) => {
+    const handlerEdit = (id: string) => {
         setIdToEdit(id);
     };
 
     const createNewList = (name: string) => {
+        const newUuid = uuid();
+        const nameList = "Lista #" + (lists.length + 1);
         setLists((prevState) => [
             ...prevState,
             {
-                id: uuid(),
-                name: `${name || "Lista #" + (lists.length + 1)}`,
+                id: newUuid,
+                name: `${name || nameList}`,
                 items: [],
-                listColor: getColor(currentColorIndex)
+                listColor: getColor(currentColorIndex),
+                checkCount: 0,
+                strikethrough: 0
             } as IList,
         ]);
         setCurrentColorIndex(changeCurrentColorIndex)
