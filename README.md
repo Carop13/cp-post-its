@@ -1,5 +1,5 @@
 # CP Post Its
-Some post its up for testing purposes
+A simple web app for managing and organizing digital post-it notes. Where users can easily add, edit, and delete notes in real-time, while also benefiting from filtering and search functionality to quickly find specific notes.
 
 ![Example](./image.png)
 
